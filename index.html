@@ -5,13 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload"
-        href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-        as="style" type="text/css">
-    <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
-        crossorigin="anonymous">
+    <link rel="preload" onload="this.onload=null;this.rel='stylesheet'"
+        href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        as="style" type="text/css" />
     <title>MyMail</title>
     <link rel="stylesheet" href="css/style.css">
     <link
@@ -27,7 +23,7 @@
         <!-- <h1 class="text-center pt-4 fst-italic">My mail.com</h1> -->
         <div class="row">
             <div class="col d-flex align-items-center g-0 mt-4">
-                <button type="button" id="btnUpdate" class="btn-update me-2">
+                <button type="button" id="btnRefresh" class="btn-refresh me-2">
                     <i class="fas fa-sync"></i>
                 </button>
                 <p class="col-lg-2 col-sm-4 mb-0">Повідомлень - </p>
@@ -35,28 +31,6 @@
             </div>
         </div>
         <div class="row mail-list d-flex flex-column" id="mailList">
-            <!-- <div class="letter d-flex align-items-center py-3 ps-4 col">
-                <img src="https://robohash.org/repellendusimpeditnisi.png?size=50x50&set=set1"
-                    width="1" height="1" loading="lazy" class="avatar"
-                    alt="avatar">
-                <div class="contact-block col-3 ms-3">
-                    <h2 class="fs-5">Guss Marvelley</h2>
-                    <a href="tel:+63 (924) 979-2252"
-                        class="tel m-0 text-decoration-none">+63 (924)
-                        979-2252</a>
-                </div>
-                <p class="m-0 lh-sm">Proin leo odio, porttitor id, consequat in,
-                    consequat
-                    ut,nulla. Sed accumsan felis. Ut at dolor quis odio
-                    consequat varius. Integer ac leo. Pellentesque ultrices
-                    mattis odio. Donec vitae nisi. Nam ultrices, libero non
-                    mattis pulvinar, nulla pede ullamcorper augue, a suscipit
-                    nulla elit ac nulla. Sed vel enim sit amet nunc viverra
-                    dapibus. Nulla suscipit ligula in lacus.</p>
-                <div class="date-time-block col-3 text-center">
-                    <span>1609595510000</span>
-                </div>
-            </div> -->
 
         </div>
     </div>

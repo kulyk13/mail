@@ -1,6 +1,7 @@
 //Global variables
 let SENDERS = JSON.parse(DATA);
 const mailListEl = document.getElementById('mailList');
+const btnRefrshEl = document.getElementById('btnRefresh');
 const dateFormater = new Intl.DateTimeFormat();
 const timeFormater = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
@@ -17,6 +18,23 @@ const timeFormater = new Intl.DateTimeFormat(undefined, {
 //     "seen": false
 //   },
 
+
+
+btnRefrshEl.addEventListener('click', event => {
+    const btnEl = event.target.closest('.btn-refresh');
+    console.log('Click')
+    if (btnEl) {
+    renderLetters(SENDERS, mailListEl)
+    }
+})
+
+mailListEl.addEventListener('click', event => {
+    const letterEl = event.target.closest('.letter');
+    console.log('click on letter')
+    
+})
+
+
 renderLetters(SENDERS, mailListEl)
 
 function renderLetters(data_array, element) {
@@ -28,10 +46,15 @@ function renderLetters(data_array, element) {
     element.innerHTML = html;
 }
 
+function sortLetters(letter) {
 
+}
 
 
 function createLetterHTML(letter_data) {
+    if (letter_data.seen == false) {
+
+    }
     return `<div class="letter d-flex align-items-center py-3 ps-4 col">
     <img src="${letter_data.avatar}"
         width="1" height="1" loading="lazy" class="avatar"
