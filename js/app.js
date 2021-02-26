@@ -2,6 +2,7 @@
 let SENDERS = JSON.parse(DATA);
 const mailListEl = document.getElementById('mailList');
 const btnRefrshEl = document.getElementById('btnRefresh');
+const messageEl = document.querySelectorAll('.letter');
 const dateFormater = new Intl.DateTimeFormat();
 const timeFormater = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
@@ -31,7 +32,10 @@ btnRefrshEl.addEventListener('click', event => {
 mailListEl.addEventListener('click', event => {
     const letterEl = event.target.closest('.letter');
     console.log('click on letter')
-    
+    if (letterEl) {
+        
+        console.log('true')
+    }
 })
 
 
@@ -50,12 +54,15 @@ function sortLetters(letter) {
 
 }
 
-
 function createLetterHTML(letter_data) {
-    if (letter_data.seen == false) {
-
+    let letterSeen = '';
+    if (letter_data.seen == true) {
+        letterSeen += '<i class="text-success me-3 fas fa-circle"></i>'
+    } else {
+        letterSeen += '<i class="text-warning me-3 far fa-circle"></i>'
     }
     return `<div class="letter d-flex align-items-center py-3 ps-4 col">
+    ${letterSeen}
     <img src="${letter_data.avatar}"
         width="1" height="1" loading="lazy" class="avatar"
         alt="avatar">
