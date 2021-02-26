@@ -34,7 +34,6 @@ mailListEl.addEventListener('click', event => {
     console.log('click on letter')
     if (letterEl) {
         
-        console.log('true')
     }
 })
 
@@ -57,9 +56,9 @@ function sortLetters(letter) {
 function createLetterHTML(letter_data) {
     let letterSeen = '';
     if (letter_data.seen == true) {
-        letterSeen += '<i class="text-success me-3 fas fa-circle"></i>'
+        letterSeen += '<i class="text-primary me-3 far fa-circle"></i>'
     } else {
-        letterSeen += '<i class="text-warning me-3 far fa-circle"></i>'
+        letterSeen += '<i class="text-primary me-3 fas fa-circle"></i>'
     }
     return `<div class="letter d-flex align-items-center py-3 ps-4 col">
     ${letterSeen}
