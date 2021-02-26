@@ -3,6 +3,8 @@ let SENDERS = JSON.parse(DATA);
 const mailListEl = document.getElementById('mailList');
 const btnRefrshEl = document.getElementById('btnRefresh');
 const messageEl = document.querySelectorAll('.letter');
+const allCountEl = document.getElementById('allCount')
+const unreadCountEl = document.getElementById('unreadCount')
 const dateFormater = new Intl.DateTimeFormat();
 const timeFormater = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
@@ -25,7 +27,8 @@ btnRefrshEl.addEventListener('click', event => {
     const btnEl = event.target.closest('.btn-refresh');
     console.log('Click')
     if (btnEl) {
-    renderLetters(SENDERS, mailListEl)
+        SENDERS = JSON.parse(DATA)
+        renderLetters(SENDERS, mailListEl)
     }
 })
 
@@ -33,7 +36,18 @@ mailListEl.addEventListener('click', event => {
     const letterEl = event.target.closest('.letter');
     console.log('click on letter')
     if (letterEl) {
-        
+        const letterId = letterEl.dataset.id
+        console.log(letterId);
+        SENDERS.forEach((message, i, array) => {
+            if (message.id == letterId) {
+                if (!message.seen) {
+                    array[i] = {...array[i], seen: true}
+                } else{
+                    array.splice(i, 1)
+                }
+            }
+        })
+        renderLetters(SENDERS, mailListEl)
     }
 })
 
@@ -42,26 +56,20 @@ renderLetters(SENDERS, mailListEl)
 
 function renderLetters(data_array, element) {
     let html = '';
-
+    allCountEl.textContent = data_array.length
+    unreadCountEl.textContent = data_array.filter(mess => !mess.seen).length
+    data_array.sort((a,b) => {
+        return a.seen - b.seen || b.date - a.date
+    })
     data_array.forEach(letter => {
         html += createLetterHTML(letter);
     });
     element.innerHTML = html;
 }
 
-function sortLetters(letter) {
-
-}
-
 function createLetterHTML(letter_data) {
-    let letterSeen = '';
-    if (letter_data.seen == true) {
-        letterSeen += '<i class="text-primary me-3 far fa-circle"></i>'
-    } else {
-        letterSeen += '<i class="text-primary me-3 fas fa-circle"></i>'
-    }
-    return `<div class="letter d-flex align-items-center py-3 ps-4 col">
-    ${letterSeen}
+    return `<div class="letter d-flex align-items-center py-3 ps-4 col mb-2" data-id="${letter_data.id}">
+    <i class="text-primary me-3 ${letter_data.seen ? 'far' : 'fas'} fa-circle"></i>
     <img src="${letter_data.avatar}"
         width="1" height="1" loading="lazy" class="avatar"
         alt="avatar">
@@ -77,3 +85,72 @@ function createLetterHTML(letter_data) {
     </div>
 </div>`
 }
+
+
+
+// console.log(1);
+// let result = null
+// setTimeout(() => {
+//     console.log(2.1);
+//     result = 20
+// }, 0);
+// setTimeout(() => {
+//     console.log(2.2);
+// }, 0);
+// setTimeout(() => {
+//     console.log(2.3);
+//     console.log(result);
+// }, 0);
+
+
+// for (let i = 0; i < 1000000000; i++) {
+//     i*2
+// }
+
+
+
+// function getAsyncData(cb) {
+//     setTimeout(() => {
+//         let rand = (Math.random() * 10).toFixed(0)
+//         cb(rand)
+//     }, Math.random() * 3000);
+// }
+
+
+// getAsyncData(result => {
+//     console.log(result);
+// })
+
+
+function getAsyncData() {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            let rand = (Math.random() * 10).toFixed(0)
+            if (rand > 5) {
+                resolve(rand)
+            } else{
+                reject({error: 'Num is very small', result: rand})
+            }
+        }, Math.random() * 3000);
+    })
+}
+
+const promiseResult = getAsyncData()
+
+promiseResult
+    .finally(() => console.log('Finally! Yahoo!!'))
+    .then(result => console.log('then',result))
+    .catch(error => console.log('catch',error))
+    
+
+
+
+// let aa = {
+//     num: 5
+// }
+
+// console.log(aa);
+
+// setTimeout(() => {
+//     aa.num = 25
+// }, 2000);
