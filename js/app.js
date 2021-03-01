@@ -42,6 +42,7 @@ mailListEl.addEventListener('click', event => {
             if (message.id == letterId) {
                 if (!message.seen) {
                     array[i] = {...array[i], seen: true}
+                    console.log();
                 } else{
                     array.splice(i, 1)
                 }
